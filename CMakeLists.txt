@@ -6,6 +6,6 @@ find_package(Threads REQUIRED)
 
 set(CMAKE_CXX_STANDARD 11)
 
-ux_source_directory(${CMAKE_SOURCE_DIR}/src SRCS)
+aux_source_directory(${CMAKE_SOURCE_DIR}/src SRCS)
 
 add_executable(${PROJECT_NAME} ${SRCS})
