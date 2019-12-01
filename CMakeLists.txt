@@ -14,4 +14,4 @@ aux_source_directory(${CMAKE_SOURCE_DIR}/src SRCS)
 
 add_executable(${PROJECT_NAME} ${SRCS})
 
-target_link_libraries(${PROJECT_NAME} libcurl)
+target_link_libraries(${PROJECT_NAME} libcurl_imp)
