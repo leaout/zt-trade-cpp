@@ -29,9 +29,6 @@ enum {
     QUERY_CANCEL_ENTRUSTS,
 
     QUERY_TRADES,
-    MARKET_SELL_ORDER,
-
-    CANCEL_ORDER,
 };
 
 
