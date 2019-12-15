@@ -1,13 +1,33 @@
 #include "ZtTrader.h"
 
 
-
 CZtTrader::CZtTrader() {
     curl_global_init(CURL_GLOBAL_DEFAULT);
 }
 
-CZtTrader::CZtTrader(const string& base_url):m_trade_url(base_url) {
+CZtTrader::CZtTrader(const string& base_url) {
     curl_global_init(CURL_GLOBAL_DEFAULT);
+
+    m_limit_buy_url = base_url + "/api/buy";
+
+    m_limit_sell_url = base_url + "/api/sell";
+
+    m_market_buy_url = base_url + "/api/market_buy";
+
+    m_market_sell_url = base_url + "/api/market_sell";
+
+    m_cancel_entrust_url = base_url + "/api/cancel_entrust";
+
+
+    m_position_url = base_url + "/api/position";
+
+    m_today_entrusts_url = base_url + "/api/today_entrusts";
+
+    m_today_trades_url = base_url + "/api/today_trades";
+
+    m_cancel_entrusts_url = base_url + "/api/cancel_entrusts";
+
+    m_auto_ipo = base_url + "/api/auto_ipo";
 }
 
 CZtTrader::~CZtTrader() {
@@ -123,12 +143,11 @@ CURLcode CZtTrader::curl_post(const string& url, const string& data,
     curl_easy_cleanup(conn);
 
     return code;
-
 }
 
 bool CZtTrader::new_stock() {
     string out_buf;
-    if (curl_get(m_trade_url + "/api/auto_ipo", out_buf) != CURLE_OK) {
+    if (curl_get(m_auto_ipo, out_buf) != CURLE_OK) {
         std::cerr << "new_stock curl_get failed" << endl;
         return false;
     }

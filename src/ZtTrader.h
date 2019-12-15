@@ -13,6 +13,28 @@ using namespace std;
 
 static char error_buffer[CURL_ERROR_SIZE];
 
+enum {
+    LIMIT_BUY_ORDER = 0,
+    LIMIT_SELL_ORDER,
+
+    MARKET_BUY_ORDER,
+    MARKET_SELL_ORDER,
+
+    CANCEL_ORDER,
+};
+
+enum {
+    QUERY_POSITION = 0,
+    QUERY_ENTRUSTS,
+    QUERY_CANCEL_ENTRUSTS,
+
+    QUERY_TRADES,
+    MARKET_SELL_ORDER,
+
+    CANCEL_ORDER,
+};
+
+
 class CZtTrader {
   public:
     CZtTrader();
@@ -20,6 +42,9 @@ class CZtTrader {
     ~CZtTrader();
   public:
     bool new_stock();
+    bool send_order();
+    bool cancel_order();
+    bool get_position();
   public:
     //static functions
     static int writer(char* data, size_t size, size_t nmemb, std::string* writer_data);
@@ -28,6 +53,27 @@ class CZtTrader {
     static CURLcode curl_post(const string& url, const string& data, std::string& buffer);
 
   private:
-    string m_trade_url;
+    //order
+    string m_limit_buy_url;
+
+    string m_limit_sell_url;
+
+    string m_market_buy_url;
+
+    string m_market_sell_url;
+
+    string m_cancel_entrust_url;
+
+    //query
+    string m_position_url;
+
+    string m_today_entrusts_url;
+
+    string m_today_trades_url;
+
+    string m_cancel_entrusts_url;
+
+    //auto ipo
+    string m_auto_ipo;
 };
 
